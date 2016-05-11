@@ -1,6 +1,7 @@
 # Skeleton project for Swagger
 
 ##**To Run:**
+RUN npm install
 Swagger Project Start
 
 **Please set the following environment variables on your machine:**
