@@ -21,7 +21,6 @@ function characters(req, res) {
   connection.query(query,function(err,rows){
     if(err) {
         res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-        console.log(err);
     }
     else {
         res.json({"Error" : false, "Message" : "Success", "Characters" : JSON.stringify(rows)});
