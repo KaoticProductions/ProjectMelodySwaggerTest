@@ -53,7 +53,47 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/CharacterResponse"
+            $ref: "#/definitions/CharactersResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /accounts:
+    x-swagger-router-controller: accounts
+    get:
+      description: Returns a list of accounts to the caller
+      # used as the method name of the controller
+      operationId: accounts
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/AccountsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /accounts/{accountId}:
+    x-swagger-router-controller: account
+    get:
+      description: Returns a list of accounts to the caller
+      # used as the method name of the controller
+      operationId: account
+      parameters:
+        - name: accountId
+          in: path
+          description: The ID of the account to query for
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/AccountResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -69,16 +109,37 @@ definitions:
     properties:
       message:
         type: string
-  CharacterResponse:
+  CharactersResponse:
     required:
-      - Error
-      - Message
+      - error
+      - message
     properties:
-      Error:
+      error:
         type: boolean
-      Message:
+      message:
         type: string
-      Characters:
+      characters:
+        type: string
+  AccountResponse:
+    required:
+      - error
+      - accountName
+      - accountPassword
+    properties:
+      error:
+        type: boolean
+      accountName:
+        type: string
+      accountPassword:
+        type: string
+  AccountsResponse:
+    required:
+      - error
+      - accountIds
+    properties:
+      error:
+        type: boolean
+      accountIds:
         type: string
   ErrorResponse:
     required:
